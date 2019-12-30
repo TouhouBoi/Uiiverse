@@ -1,8 +1,5 @@
 <?php
-/*btw don't put your credentials in variables
-instead just use the values directly in mysqli_connect
-that way, you won't have variables which contain your username and password
-floating around accessible to anything in your files*/
+require("config.php");
 
 // die will output to console which is not what you want to do if you want a clean console
 // exit will not
@@ -13,7 +10,8 @@ function mysql_machine_broke()
 }
 
 
-$dbc = @mysqli_connect('localhost', 'root', '', 'uiiverse_db');
+$dbc = @mysqli_connect(UII_MYSQL_HOST, UII_MYSQL_USER, UII_MYSQL_PASS, UII_MYSQL_DB);
+
 if (!$dbc) {
     mysql_machine_broke();
 }
@@ -32,4 +30,3 @@ if (session_status() == PHP_SESSION_NONE) {
 if (empty($dbc->query('SELECT 1;')->num_rows)) {
     mysql_machine_broke();
 }
-
