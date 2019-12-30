@@ -51,14 +51,18 @@ $router->addRoutes(array(
     array('POST', '/posts/[i:id]/replies', 'postReply.php', 'Comment'),
     array('POST', '/posts/[i:id]/image.set_profile_post', 'favoritePost.php', 'Favorite'),
     array('POST', '/settings/profile_post.unset.json', 'favoritePost.php', 'Unfavorite'),
-  
-// Put other arrays here
-array('GET|POST', '/titles/[i:title_id]/topic', 'discussion-list.php', 'Open-discussions'),
-array('GET|POST', '/titles/[i:title_id]/artwork', 'drawing-list.php', 'Artwork'),
-array('GET|POST', '/titles/[i:title_id]/diary', 'diary-list.php', 'Community-diary'),
-array('GET|POST', '/forgot/', 'forgot.php', 'Forgot your Password?'),
-array('GET|POST', '/reset/[*:code]', 'reset.php', 'Reset-code'),
-array('GET|POST', '/reset/', 'reset.php', 'Reset')
+
+    // Put other arrays here
+    array('GET|POST', '/titles/[i:title_id]/topic', 'discussion-list.php', 'Open-discussions'),
+    array('GET|POST', '/titles/[i:title_id]/artwork', 'drawing-list.php', 'Artwork'),
+    array('GET|POST', '/titles/[i:title_id]/diary', 'diary-list.php', 'Community-diary'),
+    array('GET|POST', '/forgot/', 'forgot.php', 'Forgot your Password?'),
+    array('GET|POST', '/reset/[*:code]', 'reset.php', 'Reset-code'),
+    array('GET|POST', '/reset/', 'reset.php', 'Reset'),
+
+    // Discovery Server API
+    array('GET', '/v1/endpoint', 'api/discovery/endpoint.php', 'Endpoint-index'),
+    array('GET', '/v1/endpoint[*:type]', 'api/discovery/endpoint.php', 'Endpoint-handler')
 ));
 // Match the current request
 $match = $router->match(urldecode($_SERVER['REQUEST_URI']));
