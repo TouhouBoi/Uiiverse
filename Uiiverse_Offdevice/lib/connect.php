@@ -6,7 +6,7 @@ require("config.php");
 function mysql_machine_broke()
 {
     http_response_code(503);
-    exit('The database has disconnected itself, please try again later.');
+    exit('Failed to Connect to Database, Please try again later.');
 }
 
 
