@@ -1,34 +1,66 @@
 <?php
 require("../../lib/config.php");
 
-$server_host = $_SERVER["HTTP_HOST"];
+if (UII_DISCOVERY_MAINTENANCE_MODE == true)
+{
+  $dom = new DOMDocument();
+	$xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><result/>');
 
-$dom = new DOMDocument();
-$xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><result/>');
+	$dom->preserveWhiteSpace = false;
+	$dom->formatOutput = true;
 
-$dom->preserveWhiteSpace = false;
-$dom->formatOutput = true;
+	$xml->addChild('has_error', 1);
 
-$xml->addChild('has_error', 0);
-$xml->addChild('version', 1);
+	$xml->addChild('version', 1);
 
-$prod = $config['prod'];
+	$xml->addChild('code', 400);
 
-$endpoint = $xml->addChild('endpoint');
+	$xml->addChild('error_code', 3);
 
-$endpoint->addChild('host', $server_host);
-$endpoint->addChild('api_host', UII_DISCOVERY_API_HOST);
-$endpoint->addChild('portal_host', UII_DISCOVERY_PORTAL_HOST);
-$endpoint->addChild('n3ds_host', UII_DISCOVERY_N3DS_HOST);
+	$xml->addChild('message', 'SERVICE_MAINTENANCE');
 
-$dom->loadXML($xml->asXML());
+	$dom->loadXML($xml->asXML());
 
-$xml = $dom->saveXML();
+	$xml = $dom->saveXML();
 
-// X-Dispatch: Olive::Web::Discovery::V1::Endpoint-index
-header("X-Dispatch: Uiiverse::Web::Discovery::V1::Endpoint-index");
-header("Content-Type: application/xml");
-header("Content-Length: " . strlen($xml));
+	header('Content-Type: application/xml');
+	header('Content-Length: ' . strlen($xml));
 
-print($xml);
+	http_response_code(400);
+
+	print($xml);
+
+	exit;
+}
+else
+{
+  $server_host = $_SERVER["HTTP_HOST"];
+
+  $dom = new DOMDocument();
+  $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><result/>');
+
+  $dom->preserveWhiteSpace = false;
+  $dom->formatOutput = true;
+
+  $xml->addChild('has_error', 0);
+  $xml->addChild('version', 1);
+
+  $endpoint = $xml->addChild('endpoint');
+
+  $endpoint->addChild('host', $server_host);
+  $endpoint->addChild('api_host', UII_DISCOVERY_API_HOST);
+  $endpoint->addChild('portal_host', UII_DISCOVERY_PORTAL_HOST);
+  $endpoint->addChild('n3ds_host', UII_DISCOVERY_N3DS_HOST);
+
+  $dom->loadXML($xml->asXML());
+
+  $xml = $dom->saveXML();
+
+  // X-Dispatch: Olive::Web::Discovery::V1::Endpoint-index
+  header("X-Dispatch: Uiiverse::Web::Discovery::V1::Endpoint-index");
+  header("Content-Type: application/xml");
+  header("Content-Length: " . strlen($xml));
+
+  print($xml);
+}
 ?>
