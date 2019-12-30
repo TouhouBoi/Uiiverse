@@ -18,13 +18,13 @@ if(!empty($_SESSION['signed_in'])){
 }
 
 sidebarSetting();
-echo '</div>'; 
+echo '</div>';
 
 echo '
 <div class="main-column">
   <div class="post-list-outline">
     <div class="body-content" id="community-top" data-region="USA">
-      <h2 class="label">Communities<img class="platform-logo" src="http://web.archive.org/web/20160308014635im_/https://d13ph7xrk1ee39.cloudfront.net/img/wiiu-logo.png?27pV7WfzFh-MAl8xrlmNAg" width="94" hight="17"></h2>
+      <h2 class="label">Communities<img class="platform-logo" src="http://web.archive.org/web/20160308014635im_/https://d13ph7xrk1ee39.cloudfront.net/img/wiiu-logo.png?27pV7WfzFh-MAl8xrlmNAg" width="94" height="17"></h2>
       <h3 class="label label-wiiu">All Software</h3>
       <ul class="list community-list">';
 
