@@ -15,6 +15,7 @@
 - Two factor authentication.
 - Password resetting.
 - Working admin panel.
+- Discovery API Server
 
 # Dependencies
 
