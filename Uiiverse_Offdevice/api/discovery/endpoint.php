@@ -32,6 +32,37 @@ if (UII_DISCOVERY_MAINTENANCE_MODE == true)
 
 	exit;
 }
+else if (UII_DISCOVERY_SERVICE_CLOSED == true)
+{
+  $dom = new DOMDocument();
+	$xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><result/>');
+
+	$dom->preserveWhiteSpace = false;
+	$dom->formatOutput = true;
+
+	$xml->addChild('has_error', 1);
+
+	$xml->addChild('version', 1);
+
+	$xml->addChild('code', 400);
+
+	$xml->addChild('error_code', 3);
+
+	$xml->addChild('message', 'SERVICE_CLOSED');
+
+	$dom->loadXML($xml->asXML());
+
+	$xml = $dom->saveXML();
+
+	header('Content-Type: application/xml');
+	header('Content-Length: ' . strlen($xml));
+
+	http_response_code(400);
+
+	print($xml);
+
+	exit;
+}
 else
 {
   $server_host = $_SERVER["HTTP_HOST"];
