@@ -8,8 +8,8 @@ $router = new AltoRouter();
 $router->addRoutes(
   array(
     // Endpoint URLs
-    array('GET', '/v1/endpoint', 'api/discovery/endpoint.php', 'Endpoint-index'),
-    array('GET', '/v1/endpoint[*:type]', 'api/discovery/endpoint.php', 'Endpoint-handler')
+    array('GET', '/v1/endpoint', 'endpoint.php', 'Endpoint-index'),
+    array('GET', '/v1/endpoint[*:type]', 'endpoint.php', 'Endpoint-handler')
   )
 );
 
