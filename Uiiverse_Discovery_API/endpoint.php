@@ -1,5 +1,5 @@
 <?php
-require("../../lib/config.php");
+require("config.php");
 
 if (UII_DISCOVERY_MAINTENANCE_MODE == true)
 {
